@@ -1,0 +1,23 @@
+{% extends 'bike_store/shared/base.html' %}
+
+
+{% block site_content %}
+    <div class="d-flex">
+        <div class="row">
+            {% for bike in bikes %}
+                <div class="col-4">
+                    <div class="card m-3">
+                        <img class="card-img-top" src="{{ bike.image.url }}" alt="Card image cap">
+                        <h4>{{ bike.name }}</h4>
+                        <div class="d-flex">
+                            <div class="card m-1">{{ bike.engine_size }}cc</div>
+                            <div class="card m-1">{{ bike.reg_year }} reg</div>
+                            <div class="card m-1">{{ bike.mileage }} km</div>
+                        </div>
+                        <p class="m-1">EUR {{ bike.price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

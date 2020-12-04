@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bikes marketplace</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon"
+          href="https://png.pngtree.com/png-clipart/20190726/ourlarge/pngtree-classic-motorbike-cartoon-png-image_1616249.jpg">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+</head>
+<body>
+    {% include 'common/nav.html' %}
+    {% block site_content %}
+    {% endblock %}
+</body>
+</html>
