@@ -7,3 +7,7 @@ class BikeForm(forms.ModelForm):
     class Meta:
         model = Bike
         fields = '__all__'
+
+
+class FilterForm(forms.Form):
+    pass
