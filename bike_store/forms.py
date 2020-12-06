@@ -10,4 +10,8 @@ class BikeForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
-    pass
+    MAKE_CHOICES = [
+        ('BMW', 'BMW'),
+    ]
+
+    make = forms.ChoiceField(choices=MAKE_CHOICES, required=True)
