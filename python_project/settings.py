@@ -25,7 +25,11 @@ SECRET_KEY = '4x!3qk^jo$cg_^wn$*h^ckg49pg#a!o0pb1-nwl=s$m(@o!lp%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'bike-store-tsonko.herokuapp.com',
+]
 
 
 # Application definition
