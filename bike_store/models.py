@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -16,8 +17,10 @@ class Bike(models.Model):
     engine_size = models.IntegerField()
     body_type = models.CharField(max_length=14, choices=BODY_TYPES)
     price = models.IntegerField(blank=False)
+    description = models.TextField()
     image = models.ImageField(upload_to='bike_store')
     is_used = models.BooleanField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name} - {self.reg_year} - {self.price}'

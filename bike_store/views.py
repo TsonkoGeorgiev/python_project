@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from bike_store.forms import BikeForm
@@ -8,7 +10,7 @@ def home_page(request):
     context = {
         'bikes': Bike.objects.all(),
     }
-    return render(request, 'bike_store/home_page.html', context)
+    return render(request, 'bike_store/bikes.html', context)
 
 
 def get_new_or_used_bikes(request, is_used):
@@ -17,7 +19,7 @@ def get_new_or_used_bikes(request, is_used):
         'bikes': bikes,
     }
 
-    return render(request, 'bike_store/home_page.html', context)
+    return render(request, 'bike_store/bikes.html', context)
 
 
 def get_new_bikes(request):
@@ -30,7 +32,9 @@ def get_used_bikes(request):
     return get_new_or_used_bikes(request, is_used)
 
 
+@login_required
 def sell_a_bike(request):
+    user = request.user
     if request.method == 'GET':
         context = {
             'bike_form': BikeForm(),
@@ -42,8 +46,10 @@ def sell_a_bike(request):
                              request.FILES)
 
         if bike_form.is_valid():
+            bike = bike_form.save(commit=False)
+            bike.user = user
             bike_form.save()
-            return redirect('home page')
+            return redirect('my bikes', user.id)
 
         context = {
             'bike_form': bike_form,
@@ -52,9 +58,21 @@ def sell_a_bike(request):
         return render(request, 'bike_store/sell_a_bike.html', context)
 
 
+def bike_details(request, pk):
+    bike = Bike.objects.get(pk=pk)
+    context = {
+        'bike': bike,
+    }
+
+    return render(request, 'bike_store/bike_details.html', context)
 
 
+def bikes(request, pk):
+    user = User.objects.get(pk=pk)
+    bikes = Bike.objects.filter(user=user)
+    context = {
+        'bikes': bikes,
+    }
 
-
-
+    return render(request, 'bike_store/bikes.html', context)
 

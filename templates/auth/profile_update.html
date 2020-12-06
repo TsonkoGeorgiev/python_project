@@ -2,12 +2,11 @@
 {% load bootstrap4 %}
 
 {% block site_content %}
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center">Your new profile details</h1>
     <div class="row d-flex justify-content-center">
-        <form method="POST" action="{% url 'login user' %}">
-            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+        <form method="POST" action="{% url 'profile update' user.id %}">
             {% csrf_token %}
-            {% for field in login_form %}
+            {% for field in profile_form %}
                 {% bootstrap_field field %}
             {% endfor %}
             {% buttons %}

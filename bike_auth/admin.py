@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from bike_auth.models import Profile
+
+admin.site.register(Profile)

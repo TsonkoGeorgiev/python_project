@@ -10,11 +10,12 @@
                         <img class="card-img-top" src="{{ bike.image.url }}" alt="Card image cap">
                         <h4>{{ bike.name }}</h4>
                         <div class="d-flex">
-                            <div class="card m-1">{{ bike.engine_size }}cc</div>
-                            <div class="card m-1">{{ bike.reg_year }} reg</div>
-                            <div class="card m-1">{{ bike.mileage }} km</div>
+                            <div class="card m-1 bike_detail">{{ bike.engine_size }}cc</div>
+                            <div class="card m-1 bike_detail">{{ bike.reg_year }} reg</div>
+                            <div class="card m-1 bike_detail">{{ bike.mileage }} km</div>
                         </div>
-                        <p class="m-1">EUR {{ bike.price }}</p>
+                        <p class="m-1 price">EUR {{ bike.price }}</p>
+                        <a class="nav-link" href="{% url 'bike details' bike.id %}">More details ...</a>
                     </div>
                 </div>
             {% endfor %}

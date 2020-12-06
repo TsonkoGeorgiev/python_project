@@ -4,11 +4,12 @@
 {% block site_content %}
     <h1 class="text-center">Register</h1>
     <div class="row d-flex justify-content-center">
-        <form method="POST" action="{% url 'sign up' %}">
+        <form method="POST" action="{% url 'sign up' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {% for field in signup_form %}
-                {% bootstrap_field field %}
-            {% endfor %}
+            {% bootstrap_field signup_form.username %}
+            {% bootstrap_field profile_form.email %}
+            {% bootstrap_field signup_form.password1 %}
+            {% bootstrap_field signup_form.password2 %}
             {% buttons %}
                 <button class="btn btn-primary">Submit</button>
             {% endbuttons %}

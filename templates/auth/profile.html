@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+{% load %}
+
+{% block site_content %}
+    <h1 class="text-center">Your profile</h1>
+    <div class="col-4 centered">
+        <div class="card m-3">
+            {% if profile.profile_photo.url != '' %}
+                <img class="card-img-top" src="{{ profile.profile_photo.url }}" alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="/media/profiles/default/default_photo.png" alt="Card image cap"/>
+            {% endif %}
+            <div>
+                <p>Email: {{ profile.email }}</p>
+                <p>Tel: {{ profile.tel_number }}</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <a class="btn btn-success" href="{% url 'profile update' user.id %}">Edit</a>
+        </div>
+    </div>
+{% endblock %}

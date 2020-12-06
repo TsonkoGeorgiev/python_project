@@ -1,0 +1,21 @@
+{% extends 'common/base.html' %}
+
+
+{% block site_content %}
+    <div class="d-flex m-3">
+        <div class="col-6">
+            <img class="card-img-top" src="{{ bike.image.url }}" alt="Card image cap">
+        </div>
+        <div class="col-6">
+            <h1>{{ bike.name }}</h1>
+            <div class="d-flex">
+                <div class="card m-1 bike_detail">{{ bike.engine_size }}cc</div>
+                <div class="card m-1 bike_detail">{{ bike.reg_year }} reg</div>
+                <div class="card m-1 bike_detail">{{ bike.mileage }} km</div>
+            </div>
+            <p class="m-1 price">EUR {{ bike.price }}</p>
+            <p class="m-1 description">Description:</p>
+            <p class="m-1">{{ bike.description }}</p>
+        </div>
+    </div>
+{% endblock %}
