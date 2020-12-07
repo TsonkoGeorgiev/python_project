@@ -31,3 +31,13 @@ class BikeForm(forms.ModelForm):
         if price < 0:
             raise forms.ValidationError('Cannot use negative values')
         return price
+
+
+class DeleteBikeForm(BikeForm):
+    def __init__(self, *args, **kwargs):
+        BikeForm.__init__(self, *args, **kwargs)
+
+        for (_, v) in self.fields.items():
+            v.widget.attrs['disabled'] = True
+            v.widget.attrs['readonly'] = True
+

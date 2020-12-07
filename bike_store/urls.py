@@ -1,6 +1,7 @@
 from django.urls import path
 
-from bike_store.views import home_page, get_new_bikes, get_used_bikes, sell_a_bike, bike_details, bikes
+from bike_store.views import home_page, get_new_bikes, get_used_bikes, sell_a_bike, bike_details, my_bikes, edit_bike, \
+    delete_bike
 
 urlpatterns = [
     path('', home_page, name='home page'),
@@ -8,5 +9,7 @@ urlpatterns = [
     path('used-bikes/', get_used_bikes, name='used bikes'),
     path('sell-a-bike/', sell_a_bike, name='sell a bike'),
     path('bike-details/<int:pk>/', bike_details, name='bike details'),
-    path('my-bikes/<int:pk>/', bikes, name='my bikes'),
+    path('my-bikes/<int:pk>/', my_bikes, name='my bikes'),
+    path('edit-bike/<int:pk>/', edit_bike, name='edit bike'),
+    path('delete-bike/<int:pk>/', delete_bike, name='delete bike'),
 ]

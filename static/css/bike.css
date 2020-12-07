@@ -1,0 +1,11 @@
+.bike_detail {
+    background-color: lightskyblue;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.description {
+    text-decoration: underline;
+}

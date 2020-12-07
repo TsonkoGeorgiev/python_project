@@ -16,6 +16,12 @@
             <p class="m-1 price">EUR {{ bike.price }}</p>
             <p class="m-1 description">Description:</p>
             <p class="m-1">{{ bike.description }}</p>
+            <div class="d-flex">
+                MAKE IT FOR CURRENT USER ONLY
+                <a class="btn btn-success m-1" href="{% url 'edit bike' bike.id %}">Edit</a>
+                <a class="btn btn-danger m-1" href="{% url 'delete bike' bike.id %}">Delete</a>
+                CONTACT DETAILS BUTTON FOR NON-CURRENT USERS ONLY
+            </div>
         </div>
     </div>
 {% endblock %}
