@@ -15,7 +15,7 @@ def signup(request):
             'profile_form': ProfileForm(),
         }
 
-        return render(request, 'auth/signup.html', context)
+        return render(request, 'auth/register.html', context)
     else:
         signup_form = SignupForm(request.POST)
         profile_form = ProfileForm(request.POST)
@@ -33,7 +33,7 @@ def signup(request):
             'profile_form': profile_form,
         }
 
-        return render(request, 'auth/signup.html', context)
+        return render(request, 'auth/register.html', context)
 
 
 def get_next_url(params):
@@ -115,10 +115,15 @@ def update_my_profile(request, pk):
         return render(request, 'auth/profile_update.html', context)
 
 
+def get_profile_of_bike_owner(request, pk):
+    owner = User.objects.get(pk=pk)
+    owner_profile = Profile.objects.get(user_id=owner.id)
+    context = {
+        'owner': owner,
+        'owner_profile': owner_profile,
+    }
 
-
-
-
+    return render(request,'auth/profile.html', context)
 
 
 

@@ -2,21 +2,37 @@
 {% load %}
 
 {% block site_content %}
-    <h1 class="text-center">Your profile</h1>
-    <div class="col-4 centered">
-        <div class="card m-3">
-            {% if profile.profile_photo.url != '' %}
-                <img class="card-img-top" src="{{ profile.profile_photo.url }}" alt="Card image cap">
+    {% if owner %}
+        <div class="text-center">
+            <h1>Profile details</h1>
+            {% if owner_profile.profile_photo %}
+                <img class="rounded-circle mb-3" src="{{ owner_profile.profile_photo.url }}" alt="Card image cap"
+                     width="140" height="140">
             {% else %}
-                <img class="card-img-top" src="/media/profiles/default/default_photo.png" alt="Card image cap"/>
+                <img class="rounded-circle mb-3" src="/media/profiles/default/default_photo.png" alt="Card image cap"
+                     width="140" height="140">
+            {% endif %}
+            <div>
+                <p>Username: {{ owner.username }}</p>
+                <p>Email: {{ owner_profile.email }}</p>
+                <p>Tel: {{ owner_profile.tel_number }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h1>Profile details</h1>
+            {% if profile.profile_photo %}
+                <img class="rounded-circle mb-3" src="{{ profile.profile_photo.url }}" alt="Card image cap" width="140"
+                     height="140">
+            {% else %}
+                <img class="rounded-circle mb-3" src="/media/profiles/default/default_photo.png" alt="Card image cap"
+                     width="140" height="140">
             {% endif %}
             <div>
                 <p>Email: {{ profile.email }}</p>
                 <p>Tel: {{ profile.tel_number }}</p>
+                <a class="btn btn-success" href="{% url 'profile update' user.id %}">Edit</a>
             </div>
         </div>
-        <div class="col-3">
-            <a class="btn btn-success" href="{% url 'profile update' user.id %}">Edit</a>
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}

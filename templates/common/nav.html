@@ -9,12 +9,6 @@
                 <a class="nav-link" href="{% url 'home page' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'new bikes' %}">New bikes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'used bikes' %}">Used bikes</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{% url 'sell a bike' %}">Sell my bike</a>
             </li>
             {% if user.is_authenticated %}
@@ -30,7 +24,7 @@
             <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
         {% else %}
             <a class="nav-link" href="{% url 'login user' %}">Login</a>
-            <a class="nav-link" href="{% url 'sign up' %}">Sign Up</a>
+            <a class="nav-link" href="{% url 'sign up' %}">Register</a>
         {% endif %}
     </div>
 </nav>

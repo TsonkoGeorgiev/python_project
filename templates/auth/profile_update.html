@@ -6,9 +6,9 @@
     <div class="row d-flex justify-content-center">
         <form method="POST" action="{% url 'profile update' user.id %}">
             {% csrf_token %}
-            {% for field in profile_form %}
-                {% bootstrap_field field %}
-            {% endfor %}
+            {% bootstrap_field profile_form.profile_photo %}
+            {% bootstrap_field profile_form.email %}
+            {% bootstrap_field profile_form.tel_number %}
             {% buttons %}
                 <button class="btn btn-primary">Submit</button>
             {% endbuttons %}

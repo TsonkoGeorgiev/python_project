@@ -1,17 +1,36 @@
 {% extends 'common/base.html' %}
+{% load bootstrap4 %}
 
 
 {% block site_content %}
     <div class="d-flex">
-        <div class="col-3">Filters</div>
-        <div class="col-9">
+    <div class="col-2">
+        {% if view == 'home_page' %}
+            <a class="nav-link btn btn-info col-6" href="{% url 'home page' %}">Clear filter</a>
+            <form method="get">
+                {% csrf_token %}
+                {% for field in filter_form %}
+                    {% bootstrap_field field %}
+                {% endfor %}
+                {% buttons %}
+                    <button class="btn btn-primary">Filter</button>
+                {% endbuttons %}
+
+            </form>
+        {% endif %}
+    </div>
+    <div class="col-1"></div>
+    <div class="col-9">
+        {% if not bikes %}
+            <h1>No results</h1>
+        {% else %}
             <div class="d-flex">
                 <div class="row">
                     {% for bike in bikes %}
                         <div class="col-4">
                             <div class="card m-3">
                                 <img class="card-img-top" src="{{ bike.image.url }}" alt="Card image cap">
-                                <h4>{{ bike.name }}</h4>
+                                <h4>{{ bike.make }}</h4>
                                 <div class="d-flex">
                                     <div class="card m-1 bike_detail">{{ bike.engine_size }}cc</div>
                                     <div class="card m-1 bike_detail">{{ bike.reg_year }} reg</div>
@@ -24,6 +43,6 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
