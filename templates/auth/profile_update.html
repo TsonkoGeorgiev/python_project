@@ -4,7 +4,7 @@
 {% block site_content %}
     <h1 class="text-center">Your new profile details</h1>
     <div class="row d-flex justify-content-center">
-        <form method="POST" action="{% url 'profile update' user.id %}">
+        <form method="POST" action="{% url 'profile update' user.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_field profile_form.profile_photo %}
             {% bootstrap_field profile_form.email %}
