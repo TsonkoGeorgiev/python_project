@@ -36,7 +36,7 @@ class BikeForm(forms.ModelForm):
 
 class DeleteBikeForm(BikeForm):
     def __init__(self, *args, **kwargs):
-        BikeForm.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         for (_, v) in self.fields.items():
             v.widget.attrs['disabled'] = True
