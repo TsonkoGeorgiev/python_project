@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
+from django.views.generic.base import View
 
 from bike_store.forms import BikeForm, DeleteBikeForm, FilterForm
 from bike_store.models import Bike
@@ -97,16 +99,42 @@ def home_page(request):
     return render(request, 'bike_store/bikes.html', context)
 
 
-@login_required
-def sell_a_bike(request):
-    user = request.user
-    if request.method == 'GET':
+# @login_required
+# def sell_a_bike(request):
+#     user = request.user
+#     if request.method == 'GET':
+#         context = {
+#             'bike_form': BikeForm(),
+#         }
+#
+#         return render(request, 'bike_store/sell_a_bike.html', context)
+#     else:
+#         bike_form = BikeForm(request.POST,
+#                              request.FILES)
+#
+#         if bike_form.is_valid():
+#             bike = bike_form.save(commit=False)
+#             bike.user = user
+#             bike_form.save()
+#             return redirect('my bikes', user.id)
+#
+#         context = {
+#             'bike_form': bike_form,
+#         }
+#
+#         return render(request, 'bike_store/sell_a_bike.html', context)
+
+@method_decorator(login_required, name='dispatch')
+class SellBike(View):
+    def get(self, request):
         context = {
             'bike_form': BikeForm(),
         }
 
         return render(request, 'bike_store/sell_a_bike.html', context)
-    else:
+
+    def post(self, request):
+        user = request.user
         bike_form = BikeForm(request.POST,
                              request.FILES)
 
