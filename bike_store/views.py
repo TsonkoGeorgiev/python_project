@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
 
 from bike_store.forms import BikeForm, DeleteBikeForm, FilterForm
 from bike_store.models import Bike
@@ -133,16 +134,27 @@ def bike_details(request, pk):
     return render(request, 'bike_store/bike_details.html', context)
 
 
-def my_bikes(request, pk):
-    filter_form = FilterForm()
-    user = User.objects.get(pk=pk)
-    bikes = Bike.objects.filter(user=user)
-    context = {
-        'bikes': bikes,
-        'filter_form': filter_form,
-    }
+# def my_bikes(request, pk):
+#     filter_form = FilterForm()
+#     user = User.objects.get(pk=pk)
+#     bikes = Bike.objects.filter(user=user)
+#     context = {
+#         'bikes': bikes,
+#         'filter_form': filter_form,
+#     }
+#
+#     return render(request, 'bike_store/bikes.html', context)
 
-    return render(request, 'bike_store/bikes.html', context)
+
+class MyBikes(DetailView):
+    model = User
+    template_name = 'bike_store/bikes.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = context['user']
+        context['bikes'] = Bike.objects.filter(user=user)
+        return context
 
 
 def edit_bike(request, pk):
@@ -184,6 +196,3 @@ def delete_bike(request, pk):
     else:
         bike.delete()
         return redirect('my bikes', request.user.id)
-
-
-
